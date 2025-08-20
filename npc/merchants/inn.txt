@@ -122,7 +122,7 @@ lhz_in02,230,284,4	script	Hotel Employee#01	86,{
 	mes "finest accomodations";
 	mes "and the best service.";
 	next;
-	switch(select("Save Point:Rest - 5,000 zeny:Cancel")) {
+	switch(select("Save Point:Rest - 1,000 zeny:Cancel")) {
 	case 1:
 		savepoint "lhz_in02",209,275,1,1;
 		mes "[Hotel Employee]";
@@ -132,14 +132,14 @@ lhz_in02,230,284,4	script	Hotel Employee#01	86,{
 		mes "the Royal Dragon.";
 		close;
 	case 2:
-		if(Zeny < 5000) {
+		if(Zeny < 1000) {
 			mes "[Hotel Employee]";
 			mes "I'm sorry, but";
-			mes "you need 5,000 zeny";
+			mes "you need 1,000 zeny";
 			mes "in order to check in.";
 			close;
 		}
-		set Zeny,Zeny - 5000;
+		set Zeny,Zeny - 1000;
 		mes "[Hotel Employee]";
 		mes "Thank you~";
 		mes "I hope you enjoy";
@@ -173,7 +173,7 @@ ve_in,157,219,5	script	Inn Master#Receptionist	709,{
 	mes "most comfortable";
 	mes "inn here in Veins~";
 	next;
-	switch(select("Save:Take a Rest -> 5000 zeny:Quit")) {
+	switch(select("Save:Take a Rest -> 1000 zeny:Quit")) {
 	case 1:
 		mes "[Inn Master]";
 		mes "Your Respawn Point";
@@ -183,16 +183,16 @@ ve_in,157,219,5	script	Inn Master#Receptionist	709,{
 		close;
 	case 2:
 		mes "[Inn Master]";
-		if(Zeny < 5000){
+		if(Zeny < 1000){
 			mes "I'm sorry, but I don't";
 			mes "think you have enough";
 			mes "money to check in. The";
-			mes "service charge is 5,000 zeny.";
+			mes "service charge is 1,000 zeny.";
 			close;
 		}
 		mes "Enjoy your stay~";
 		close2;
-		set Zeny,Zeny - 5000;
+		set Zeny,Zeny - 1000;
 		percentheal 100,100;
 		warp "ve_in",184,228;
 		end;
@@ -208,7 +208,7 @@ bra_in01,27,24,3	script	Hotel Keeper#bra1	478,{
 	mes "[Hotel Keeper]";
 	mes "Welcome to the beautiful Brasilis Hotel.";
 	next;
-	switch(select("Save:Rest -5000 zeny:Cancel")) {
+	switch(select("Save:Rest -1000 zeny:Cancel")) {
 	case 1:
 		mes "[Hotel Keeper]";
 		mes "Do you want to save here at the Brasilis Hotel?";
@@ -226,19 +226,19 @@ bra_in01,27,24,3	script	Hotel Keeper#bra1	478,{
 		}
 		end;
 	case 2:
-		if (Zeny > 4999) {
+		if (Zeny > 999) {
 			mes "[Hotel Keeper]";
 			mes "I will show you a great room.";
 			close2;
-			if (Zeny < 5000)
+			if (Zeny < 1000)
 				end;
-			Zeny -= 5000;
+			Zeny -= 1000;
 			percentheal 100,100;
 			warp "bra_in01",144,69;
 			end;
 		}
 		mes "[Hotel Keeper]";
-		mes "I'm sorry, but the service charge is 5,000 zeny per night.";
+		mes "I'm sorry, but the service charge is 1,000 zeny per night.";
 	case 3:
 		close;
 	}
@@ -270,7 +270,7 @@ ein_in01,206,224,3	script	Hotel Employee#ein	855,{
 		next;
 	}
 	else {
-		switch(select("Save:Take Rest - 5,000 zeny:Cancel")) {
+		switch(select("Save:Take Rest - 1,000 zeny:Cancel")) {
 		case 1:
 			mes "[Hotel Employee]";
 			mes "Your Respawn Point";
@@ -282,13 +282,13 @@ ein_in01,206,224,3	script	Hotel Employee#ein	855,{
 			savepoint "ein_in01",200,224,1,1;
 			end;
 		case 2:
-			if (Zeny > 4999) {
+			if (Zeny > 999) {
 				mes "[Hotel Employee]";
 				mes "Thank you.";
 				mes "Please enjoy";
 				mes "your rest~";
 				close2;
-				set Zeny, Zeny-5000;
+				set Zeny, Zeny-1000;
 				percentheal 100,100;
 				warp "ein_in01",272,167;
 				end;
@@ -297,7 +297,7 @@ ein_in01,206,224,3	script	Hotel Employee#ein	855,{
 				mes "[Hotel Employee]";
 				mes "I'm sorry, but the";
 				mes "accommodation fee is";
-				mes "5,000 zeny. Next time,";
+				mes "1,000 zeny. Next time,";
 				mes "please make sure that you";
 				mes "bring enough zeny, okay?";
 				close;
@@ -323,7 +323,7 @@ function	script	F_InnMaid	{
 	mes getarg(1) + ".";
 	mes "How may I help you?";
 	next;
-	switch(select("Save:Take a Rest -> 5000 zeny:Cancel")) {
+	switch(select("Save:Take a Rest -> 1000 zeny:Cancel")) {
 	case 1:
 		mes .@npc_name$;
 		mes "Your respawn point";
@@ -334,15 +334,15 @@ function	script	F_InnMaid	{
 		close;
 	case 2:
 		mes .@npc_name$;
-		if(Zeny < 5000){
-			mes "I'm sorry, but the service charge is 5,000 zeny. Please make sure that you have enough money to check in next time, okay?";
+		if(Zeny < 1000){
+			mes "I'm sorry, but the service charge is 1,000 zeny. Please make sure that you have enough money to check in next time, okay?";
 			close;
 		}
 		mes "Thank you.";
 		mes "I hope you";
 		mes "enjoy your rest~";
 		close2;
-		set Zeny,Zeny - 5000;
+		set Zeny,Zeny - 1000;
 		percentheal 100,100;
 		return;
 	case 3:

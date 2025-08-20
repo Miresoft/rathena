@@ -219,8 +219,8 @@ Body:
     AegisName: Empty_Bottle
     Name: Empty Bottle
     Type: Etc
-    Buy: 400
-    Weight: 20
+    Buy: 6
+    Weight: 2
     Flags:
       BuyingStore: true
   - Id: 714

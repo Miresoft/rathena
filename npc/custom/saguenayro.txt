@@ -1,0 +1,20 @@
+// NPC : Panneau SaguenayRO Eden Group
+moc_para01,25,23,4	script	Panneau SaguenayRO#para	2_BULLETIN_BOARD,{
+	mes "[Configurations SaguenayRO]";
+	if (#disable_bonus_exp) {
+		mes "Le bonus d'EXP est actuellement ^FF0000DÉSACTIVÉ^000000.";
+		if (select("Activer le bonus","Annuler") == 1) {
+			set #disable_bonus_exp, 0;
+			mes "Bonus d'EXP ^00FF00activé^000000.";
+		}
+	} else {
+		mes "Le bonus d'EXP est actuellement ^00FF00ACTIVÉ^000000.";
+		if (select("Désactiver le bonus","Annuler") == 1) {
+			set #disable_bonus_exp, 1;
+			mes "Bonus d'EXP ^FF0000désactivé^000000.";
+		}
+	}
+	close;
+}
+
+new_1-1,17,36,4 duplicate(Panneau SaguenayRO)	Panneau SaguenayRO#new	2_BULLETIN_BOARD
