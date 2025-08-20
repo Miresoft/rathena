@@ -4495,7 +4495,7 @@ iz_ac01,59,83,3	script	Battle Instructor#08	4_M_NOV_HUNT,{
 		mes "- Clear inventory and try again.";
 		close;
 	}
-	if (Class == Job_Novice) {
+//	if (Class == Job_Novice) {
 		if (isbegin_quest(4269) == 2) {
 			if (JobLevel == 10) {
 				mes "[Battle Instructor Subino]";
@@ -4636,22 +4636,22 @@ iz_ac01,59,83,3	script	Battle Instructor#08	4_M_NOV_HUNT,{
 		mes "It requires a simple procedure so go and register.";
 		mes "You can register at the ^ff0000information center of academy^000000.";
 		close;
-	} else {
-		mes "[Battle Instructor Subino]";
-		mes "You don't seem to need my help.";
-		mes "You'd better look around somewhere else or go to the wider world.";
-		next;
-		mes "[Battle Instructor Subino]";
-		mes "Visit the ^ff0000support of the class guild (Lv. 10~20) or check out the Eden Group (Lv. 15~100)^000000.";
-		next;
-		mes "[Battle Instructor Subino]";
-		mes "^ff0000Ask the staff of each job on the second floor about the location of each class guild^000000 and you will find the ^ff0000Eden Group Headquarters^000000 where you can find easy hunt quests.";
-		next;
-		mes "[Battle Instructor Subino]";
-		mes "It is ^ff0000displayed in the map of right screen^000000, so search for it.";
-		mes "If you do not know, then you should get a help from a ^ff0000Town Guide^000000.";
-		close;
-	}
+//	} else {
+//		mes "[Battle Instructor Subino]";
+//		mes "You don't seem to need my help.";
+//		mes "You'd better look around somewhere else or go to the wider world.";
+//		next;
+//		mes "[Battle Instructor Subino]";
+//		mes "Visit the ^ff0000support of the class guild (Lv. 10~20) or check out the Eden Group (Lv. 15~100)^000000.";
+//		next;
+//		mes "[Battle Instructor Subino]";
+//		mes "^ff0000Ask the staff of each job on the second floor about the location of each class guild^000000 and you will find the ^ff0000Eden Group Headquarters^000000 where you can find easy hunt quests.";
+//		next;
+//		mes "[Battle Instructor Subino]";
+//		mes "It is ^ff0000displayed in the map of right screen^000000, so search for it.";
+//		mes "If you do not know, then you should get a help from a ^ff0000Town Guide^000000.";
+//		close;
+//	}
 
 L_Quest:
 	.@quest_id = getarg(0);
