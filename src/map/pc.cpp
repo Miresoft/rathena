@@ -2294,6 +2294,45 @@ bool pc_authok(map_session_data *sd, uint32 login_id2, time_t expiration_time, i
 		clif_updatestatus(*sd, SP_JOBEXP);
 	}
 
+	// SaguenayRO custom exp bonus
+	char* data;
+	int32 max_level = 0;
+	SqlStmt stmt{ *mmysql_handle };
+	if (SQL_ERROR == Sql_Query(mmysql_handle,
+		"SELECT MAX(`base_level`) FROM `%s` WHERE `account_id` = %d", "char", sd->status.account_id)
+		|| Sql_NumRows(mmysql_handle) == 0) {
+
+		if (Sql_NumRows(mmysql_handle) == 0) {
+			ShowWarning("Impossible de trouver les personnages pour account_id %d\n", sd->status.account_id);
+		} else {
+			Sql_ShowDebug(mmysql_handle);
+		}
+		Sql_FreeResult(mmysql_handle);
+	} else {
+		if (SQL_SUCCESS == Sql_NextRow(mmysql_handle)) {
+			Sql_GetData(mmysql_handle, 0, &data, NULL);
+			if (data != NULL)
+				sd->account_max_level = atoi(data);
+		}
+		Sql_FreeResult(mmysql_handle);
+	}
+
+	if (sd->account_max_level >= sd->status.base_level + 10) {
+//		int disable_bonus = pc_readaccountreg(sd, "#disable_bonus_exp");
+//		int disable_bonus = (int)pc_readaccountreg2(sd, "#disable_bonus_exp");
+//		int64 disable_bonus = pc_readreg2(sd, "#disable_bonus_exp");
+		int disable_bonus = 0;
+		if (disable_bonus == 1) {
+			clif_displaymessage(sd->fd, "Bonus d'EXP non-actif : utilisez le panneau SaguanayRO au Eden Group pour l'activer");
+		} else {
+			char output[256];
+			sprintf(output, "Bonus d'EXP actif : 2x jusqu'au niveau %d", sd->account_max_level - 10);
+			clif_displaymessage(sd->fd, output);
+		}
+	} else {
+		clif_displaymessage(sd->fd, "Pas de bonus d'EXP : aucun perso de votre compte n'a 10 niveaux de plus");
+	}
+
 	// Request all registries (auth is considered completed whence they arrive)
 	intif_request_registry(sd,7);
 	return true;
@@ -8271,6 +8310,12 @@ int32 pc_checkbaselevelup(map_session_data *sd) {
 		achievement_update_objective(sd, AG_GOAL_LEVEL, 1, base_level);
 		achievement_update_objective(sd, AG_GOAL_STATUS, 2, base_level, sd->status.class_);
 	}
+
+	// SaguenayRO exp bonus
+	if(sd->account_max_level == sd->status.base_level + 10) {
+		clif_displaymessage(sd->fd, "Bonus d'EXP perdu : vous avez moins de 10 niveaux de difference avec votre plus haut personnage.");
+	}
+
 	return 1;
 }
 
@@ -8475,6 +8520,19 @@ void pc_gainexp(map_session_data *sd, struct block_list *src, t_exp base_exp, t_
 			float nextjp = (float) job_exp / (float) nextj;
 			if (nextjp > battle_config.max_exp_gain_rate/1000.)
 				job_exp = (uint32)(battle_config.max_exp_gain_rate/1000.*nextj);
+		}
+	}
+
+	// SaguenayRO exp bonus
+	if (sd->account_max_level >= sd->status.base_level + 10) {
+//		int disable_bonus = pc_readaccountreg(sd, "#disable_bonus_exp");
+//		int disable_bonus = (int)pc_readaccountreg2(sd, "#disable_bonus_exp");
+		int32 disable_bonus = 0;
+//		int64 disable_bonus = pc_readreg2(sd, "#disable_bonus_exp");
+
+		if (disable_bonus != 1) {
+			base_exp *= 2;
+			job_exp *= 2;
 		}
 	}
 
