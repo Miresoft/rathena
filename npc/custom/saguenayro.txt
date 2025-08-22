@@ -17,4 +17,4 @@ moc_para01,25,23,4	script	Panneau SaguenayRO#para	2_BULLETIN_BOARD,{
 	close;
 }
 
-new_1-1,17,36,4 duplicate(Panneau SaguenayRO)	Panneau SaguenayRO#new	2_BULLETIN_BOARD
+iz_int,17,36,4	duplicate(Panneau SaguenayRO#para)	Panneau SaguenayRO#new	2_BULLETIN_BOARD
